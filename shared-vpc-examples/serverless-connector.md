@@ -43,10 +43,11 @@ gcloud services enable vpcaccess.googleapis.com --project ${SERVICE_PROJECT_ID}
 ## Subnet Creation
 Create a subnet for the access connector
 ```
-gcloud compute networks subnets create us-central1-serverless-access-${SERVICE_PROJECT_ID} \
+gcloud compute networks subnets create us-central1-vpc-connector-${SERVICE_PROJECT_ID} \
 --network $VPC_NETWORK \
 --range 10.50.100.0/28 \
---region us-central1 
+--region us-central1 \
+--project $HOST_PROJECT_ID
 ```
 
 Add the Service Project's Google Service Accounts Compute Network User access to the subnet
@@ -62,11 +63,12 @@ serviceAccount:${SERVICE_PROJECT_NUMBER}@cloudservices.gserviceaccount.com
 
 ## Create the VPC Access Connector
 ```
-gcloud beta compute networks vpc-access connectors create us-central1-${SERVICE_PROJECT_ID} \
+gcloud beta compute networks vpc-access connectors create us-central1-connector \
 --region us-central1 \
---subnet us-central1-serverless-access-${SERVICE_PROJECT_ID} \
+--subnet us-central1-vpc-connector-${SERVICE_PROJECT_ID} \
 --subnet-project ${HOST_PROJECT_ID} \
 --min-instances 2 \
 --max-instances 3 \
---machine-type f1-micro
+--machine-type f1-micro \
+--project ${SERVICE_PROJECT_ID}
 ```

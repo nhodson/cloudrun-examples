@@ -69,9 +69,10 @@ gcloud beta run deploy ${SERVICE_NAME} \
   --region us-central1 \
   --ingress internal \
   --vpc-egress all-traffic \
-  --vpc-connector us-central1-${SERVICE_PROJECT_ID} \
+  --vpc-connector us-central1-connector \
   --service-account cloud-run-demo-account@${SERVICE_PROJECT_ID}.iam.gserviceaccount.com \
   --no-allow-unauthenticated \
+  --set-env-vars REGION=us-central1 \
   --project ${SERVICE_PROJECT_ID}
 ```
 
