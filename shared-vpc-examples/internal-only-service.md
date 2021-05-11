@@ -11,7 +11,7 @@ If deploying to a Shared VPC service project and you want Cloud Run services to 
 1. `constraints/run.allowedVPCEgress` set to `all-traffic` or `private-ranges-only`
 
 ## VPC SC Protection
-In your service perimeter, protect the Host and Service project and all available APIs
+In your service perimeter, protect the Host and Service project and all available APIs. Requests to the *.run.app URLs must come from within the perimeter.
 
 ### Cloud Run
 Ensure DNS records exist for `run.app` to use Private Google Access
