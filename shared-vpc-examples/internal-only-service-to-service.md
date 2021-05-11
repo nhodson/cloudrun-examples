@@ -42,3 +42,28 @@ export CALLING_SERVICE_URL="$(gcloud run services describe calling --format='val
 
 curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" ${CALLING_SERVICE_URL}
 ```
+
+## Service to service auth
+Refer to [Authenticating service-to-service](https://cloud.google.com/run/docs/authenticating/service-to-service). 
+
+In this example we have created an Interceptor which can be included on API calls to Cloud Run services to simplify generation and inclusion of ID tokens.
+```
+public class GoogleAuthInterceptor implements ClientHttpRequestInterceptor {
+
+  @Override
+  public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+      throws IOException {
+    URL requestUrl = request.getURI().toURL();
+
+    GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
+    IdTokenCredentials tokenCredentials = IdTokenCredentials.newBuilder()
+        .setIdTokenProvider((IdTokenProvider) credentials).setTargetAudience(requestUrl.getProtocol() + "://" + requestUrl.getHost()).build();
+
+    String token = tokenCredentials.refreshAccessToken().getTokenValue();
+
+    request.getHeaders().setBearerAuth(token);
+    return execution.execute(request, body);
+  }
+
+}
+```
