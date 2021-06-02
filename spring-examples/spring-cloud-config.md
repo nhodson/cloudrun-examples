@@ -1,8 +1,8 @@
 # Spring Cloud Config on Cloud Run
 
 We will deploy two instances on Cloud Run
-- [spring-cloud-server](../images/spring-cloud-server): A vanilla Config Server to be deployed on Cloud Run
-- [spring-cloud-client](../images/srping-cloud-client): An example of necessary code changes for clients to be able to communicate with a Config Server instance secured by Cloud Run
+- spring-cloud-server: A vanilla Config Server to be deployed on Cloud Run
+- spring-cloud-client: An example of necessary code changes for clients to be able to communicate with a Config Server instance secured by Cloud Run
 
 ## 1. Deploying the Server
 
