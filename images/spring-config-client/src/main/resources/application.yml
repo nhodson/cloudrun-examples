@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: foo
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      enabled: true

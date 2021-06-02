@@ -1,5 +1,14 @@
 # Serverless VPC Connector Setup
 
+Environment Variable Configuration
+```
+export VPC_NETWORK=
+export HOST_PROJECT_ID=
+export SERVICE_PROJECT_ID=
+export SERVICE_PROJECT_NUMBER=
+export ACCESS_POLICY_NUMBER=
+```
+
 ## Firewalls
 One time setup for all vpc-connectors
 ```
