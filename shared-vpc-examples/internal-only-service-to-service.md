@@ -4,7 +4,7 @@ Follow the steps in [Internal only service](internal-only-service.md)
 ## Deploy the Cloud Run service
 
 Deploy the calling service which will call the receiving service deployed in the previous step
-```
+```bash
 export RECEIVING_SERVICE_URL="$(gcloud run services describe receiving --format='value(status.url)' --platform=managed --region us-central1 --project ${SERVICE_PROJECT_ID})"
 
 export SERVICE_NAME=calling
@@ -23,7 +23,7 @@ gcloud beta run deploy ${SERVICE_NAME} \
 
 ## Test the service
 Test the calling service. This should fail.
-```
+```bash
 export CALLING_SERVICE_URL="$(gcloud run services describe calling --format='value(status.url)' --platform=managed --region us-central1 --project ${SERVICE_PROJECT_ID})"
 
 curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" ${CALLING_SERVICE_URL}
@@ -37,7 +37,7 @@ gcloud run services add-iam-policy-binding receiving \
 ```
 
 Test the calling service again. This time it should pass.
-```
+```bash
 export CALLING_SERVICE_URL="$(gcloud run services describe calling --format='value(status.url)' --platform=managed --region us-central1 --project ${SERVICE_PROJECT_ID})"
 
 curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" ${CALLING_SERVICE_URL}
@@ -47,7 +47,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" ${CALLING_SE
 Refer to [Authenticating service-to-service](https://cloud.google.com/run/docs/authenticating/service-to-service). 
 
 In this example we have created an Interceptor which can be included on API calls to Cloud Run services to simplify generation and inclusion of ID tokens.
-```
+```java
 public class GoogleAuthInterceptor implements ClientHttpRequestInterceptor {
 
   @Override

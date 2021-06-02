@@ -21,8 +21,8 @@ Replace with the desired value for `PROJECT_ID`
 export PROJECT_ID=
 
 gcloud iam service-accounts create config-server-sa \
-    --display-name="Config Server service account" \
-    --project=${PROJECT_ID}
+  --display-name="Config Server service account" \
+  --project=${PROJECT_ID}
 ```
 
 ### 1.2 Config Server Deployment
@@ -32,14 +32,14 @@ Deploy the `config-server` service.
 export CONFIG_GIT_REPO=https://github.com/spring-cloud-samples/config-repo
 
 gcloud beta run deploy config-server \
---source=images/spring-config-server \
---no-allow-unauthenticated \
---service-account=config-server-sa@${PROJECT_ID}.iam.gserviceaccount.com \
---memory=1024Mi \
---set-env-vars=spring_cloud_config_server_git_uri=${CONFIG_GIT_REPO} \
---platform=managed \
---region=us-central1 \
---project=${PROJECT_ID}
+  --source=images/spring-config-server \
+  --no-allow-unauthenticated \
+  --service-account=config-server-sa@${PROJECT_ID}.iam.gserviceaccount.com \
+  --memory=1024Mi \
+  --set-env-vars=spring_cloud_config_server_git_uri=${CONFIG_GIT_REPO} \
+  --platform=managed \
+  --region=us-central1 \
+  --project=${PROJECT_ID}
 ```
 
 ## 2. Deploying the Client
@@ -109,8 +109,8 @@ Here we are creating a dedicated service account for the Config Server Client.
 
 ```bash
 gcloud iam service-accounts create config-client-sa \
-    --display-name="Config Client service account" \
-    --project=${PROJECT_ID}
+  --display-name="Config Client service account" \
+  --project=${PROJECT_ID}
 ```
 
 We must configure the receiving service, `config-server`, to accept requests from the `config-client-sa` identity.
@@ -131,15 +131,15 @@ Deploy the `config-client` service
 export SERVER_SERVICE_URL="$(gcloud run services describe config-server --format='value(status.url)' --platform=managed --region us-central1 --project ${PROJECT_ID})"
 
 gcloud beta run deploy config-client \
---source=images/spring-config-client \
---no-allow-unauthenticated \
---service-account=config-client-sa@${PROJECT_ID}.iam.gserviceaccount.com \
---memory=1024Mi \
---set-env-vars=spring_cloud_config_uri=${SERVER_SERVICE_URL} \
---set-env-vars=spring_profiles_active=dev \
---platform=managed \
---region=us-central1 \
---project=${PROJECT_ID}
+  --source=images/spring-config-client \
+  --no-allow-unauthenticated \
+  --service-account=config-client-sa@${PROJECT_ID}.iam.gserviceaccount.com \
+  --memory=1024Mi \
+  --set-env-vars=spring_cloud_config_uri=${SERVER_SERVICE_URL} \
+  --set-env-vars=spring_profiles_active=dev \
+  --platform=managed \
+  --region=us-central1 \
+  --project=${PROJECT_ID}
 ```
 
 ### 2.5 Testing
