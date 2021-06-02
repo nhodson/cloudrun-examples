@@ -5,6 +5,8 @@ If deploying to a Shared VPC service project and you want Cloud Run services to 
 
 > Resources in Shared VPC networks can only call internal services if the Shared VPC resources and the internal service are in the same VPC SC perimeter and the Cloud Run API is enabled as a VPC accessible service
 
+Alternatively, you can configure [Domain Restricted Sharing](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) to prevent external invocations.
+
 ## Configure Org Policies for Cloud Run
 
 1. `constraints/run.allowedIngress` set to `internal` or `internal-and-cloud-load-balancing` or `all`
