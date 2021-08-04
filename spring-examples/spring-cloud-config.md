@@ -142,7 +142,7 @@ gcloud beta run deploy config-client \
   --project=${PROJECT_ID}
 ```
 
-### 2.5 Testing
+### 2.4 Testing
 
 To test the app, invoke the `/actuator/env` endpoint of the client application and look for environment variables that were imported via config server.
 

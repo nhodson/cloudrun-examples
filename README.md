@@ -11,3 +11,4 @@
 
 # Spring Examples
 1. [Spring Cloud Config](spring-examples/spring-cloud-config.md)
+1. [Spring Cloud Config Vault Backend](spring-examples/vault-config-backend.md)
